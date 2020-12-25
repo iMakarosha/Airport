@@ -1,0 +1,31 @@
+﻿.container {
+  max-width: 1180px;
+  min-width: 960px;
+  position: relative; }
+
+body {
+  line-height: 1.25;
+  font-size: 14px; }
+
+.services-promo__feature {
+  padding: 20px;
+  border-radius: 10px; }
+  .services-promo__feature:hover {
+    box-shadow: 10px 0 20px #e3e9f0; }
+  .services-promo__feature img {
+    margin-bottom: 10px; }
+  .services-promo__feature .btn {
+    margin-top: 10px; }
+
+.home-footer-items {
+  margin-top: 30px; }
+  .home-footer-items ul {
+    list-style: none;
+    padding-left: 0;
+    line-height: 1.75;
+    padding-top: 8px; }
+    .home-footer-items ul a:hover {
+      text-decoration: none; }
+    .home-footer-items ul a.l1-inv {
+      padding-top: 8px;
+      font-weight: bold; }

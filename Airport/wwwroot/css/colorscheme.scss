@@ -1,0 +1,118 @@
+﻿$c1: #0d6ef0;//blue
+$c2: #ff8507;//orange
+$c3: #35c768;//green
+$c4: #ffffff;//white
+$c5: #0c131d;//black
+$c6: #a0abb8;//grey
+$c7: #eff1f4;//light grey
+$c8: #f44336; //red
+
+.l1{
+    color: $c5;
+    &:hover{
+        color: $c1;
+    }
+}
+.l1-inv {
+    color: $c1;
+
+    &:hover {
+        color: $c5;
+    }
+}
+.l2{
+    color: $c5;
+    &:hover{
+        color: $c2;
+    }
+}
+
+.l4 {
+    color: $c4;
+
+    &:hover {
+        color: darken($c4, 5%);
+    }
+}
+
+
+.t1{
+    color: $c1;
+}
+.t2{
+    color: $c2;
+}
+.t3{
+    color: $c3;
+}
+.t4{
+    color: $c4;
+}
+.t5{
+    color: $c5;
+}
+.t6 {
+    color: $c6;
+}
+
+.bg1 {
+    background-color: $c1;
+    color: $c4;
+}
+.bg2 {
+    background-color: $c2;
+    color: $c4;
+}
+.bg3 {
+    background-color: $c3;
+}
+.bg4 {
+    background-color: $c4;
+}
+.bg5 {
+    background-color: $c5;
+}
+.bg6 {
+    background-color: $c6;
+}
+.bg7 {
+    background-color: $c7;
+}
+
+.btn-blue {
+    background-color: $c1;
+    color: $c4;
+
+    &:hover {
+        background-color: lighten($c1, 10%);
+    }
+}
+
+.btn-orange {
+    background-color: $c2;
+    color: $c4;
+
+    &:hover {
+        background-color: lighten($c2, 10%);
+    }
+}
+
+.btn-white {
+    background-color: $c4;
+    color: $c5;
+
+    &:hover {
+        background-color: darken($c4, 10%);
+        color: $c1;
+    }
+}
+.btn-white2 {
+    background-color: $c4;
+    color: $c1;
+    border: 1px solid $c1;
+
+    &:hover {
+        background-color: $c1;
+        color: $c4;
+    }
+}
