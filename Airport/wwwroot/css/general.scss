@@ -58,16 +58,20 @@ header {
             text-align: center;
         }
 
-        a.carousel-control-next:hover {
-            background: linear-gradient(-90deg, #bbdefa, transparent);
+        a.carousel-control-next {
+            &:hover {
+                background: linear-gradient(-90deg, #bbdefa, transparent);
+            }
 
             .carousel-control-next-icon {
                 margin-right: -30px;
             }
         }
 
-        a.carousel-control-prev:hover {
-            background: linear-gradient(90deg, #bbdefa, transparent);
+        a.carousel-control-prev {
+            &:hover {
+                background: linear-gradient(90deg, #bbdefa, transparent);
+            }
 
             .carousel-control-next-icon {
                 margin-left: -30px;
@@ -177,6 +181,10 @@ header {
         padding-left: 0;
         padding-right: 0;
         width: 100%;
+    }
+
+    select.form-control{
+        height: 100px;
     }
 }
 

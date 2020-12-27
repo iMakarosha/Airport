@@ -15,6 +15,8 @@ namespace Airport.Models.Customer
         [Required]
         public int FlightId { get; set; }
         public Models.Flight.Flight Flight{ get; set; }
+        public int RateId { get; set; }
+        public Rate Rate { get; set; }
         [Required]
         public int PassengerId { get; set; }
         public Passenger Passenger { get; set; }

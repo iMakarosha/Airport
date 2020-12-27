@@ -36,12 +36,12 @@ header .navbar .nav-link.btn {
       text-align: center; }
     .carousel-section .carousel a.carousel-control-next:hover {
       background: linear-gradient(-90deg, #bbdefa, transparent); }
-      .carousel-section .carousel a.carousel-control-next:hover .carousel-control-next-icon {
-        margin-right: -30px; }
+    .carousel-section .carousel a.carousel-control-next .carousel-control-next-icon {
+      margin-right: -30px; }
     .carousel-section .carousel a.carousel-control-prev:hover {
       background: linear-gradient(90deg, #bbdefa, transparent); }
-      .carousel-section .carousel a.carousel-control-prev:hover .carousel-control-next-icon {
-        margin-left: -30px; }
+    .carousel-section .carousel a.carousel-control-prev .carousel-control-next-icon {
+      margin-left: -30px; }
   .carousel-section .btn-sm {
     margin: 0 4px; }
     .carousel-section .btn-sm span svg {
@@ -106,6 +106,8 @@ header .navbar .nav-link.btn {
     padding-left: 0;
     padding-right: 0;
     width: 100%; }
+  .main-filter select.form-control {
+    height: 100px; }
 
 .custom-filter .filter-item {
   border-bottom: 1px solid #f3f5f7; }

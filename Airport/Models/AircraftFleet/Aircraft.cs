@@ -26,8 +26,9 @@ namespace Airport.Models.AircraftFleet
         public int Lifetime { get; set; }
         [Required]
         public Readiness Readiness { get; set; }
-
-        public Salon Salon { get; set; }
+        public string SeatingDiagram { get; set; }
+        public string DistanceBetweenSeats { get; set; }
+        public List<Salon_ServiceClass> ServiceClasses { get; set; }
     }
 
     public class AircraftModel

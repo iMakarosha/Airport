@@ -7,23 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Airport.Models.AircraftFleet
 {
-    public class Salon
-    {
-        public int Id { get; set; }
-        [Required]
-        public int AircraftId { get; set; }
-        [Required]
-        public string SeatingDiagram { get; set; }
-        [Required]
-        public string DistanceBetweenSeats { get; set; }
-        public List<Salon_ServiceClass> ServiceClasses { get; set; }
-    }
-
     public class Salon_ServiceClass
     {
         public int Id { get; set; }
-        [Required]
-        public int SalonId { get; set; }
+        public int? AircraftId { get; set; }
         [Required]
         public ServiceClass ServiceClass { get; set; }
         [Required]

@@ -19,7 +19,6 @@ namespace Airport.Data
         public DbSet<Position> Positions { get; set; }
         public DbSet<Employee> Employees{ get; set; }
 
-        public DbSet<Salon> Salons { get; set; }
         public DbSet<Salon_ServiceClass> Salon_ServiceClasses { get; set; }
         public DbSet<AircraftModel> AircraftModels { get; set; }
         public DbSet<Aircraft> Aircrafts { get; set; }
