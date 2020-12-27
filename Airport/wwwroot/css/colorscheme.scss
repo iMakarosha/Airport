@@ -4,9 +4,17 @@ $c3: #35c768;//green
 $c4: #ffffff;//white
 $c5: #0c131d;//black
 $c6: #a0abb8;//grey
-$c7: #eff1f4;//light grey
+$c7: #f3f5f7;//light grey
 $c8: #f44336; //red
 
+
+a {
+    color: $c1;
+
+    &:hover {
+        color: darken($c1, 10%);
+    }
+}
 .l1{
     color: $c5;
     &:hover{

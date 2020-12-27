@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="38px" height="35px" viewBox="0 0 38 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 9</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M17.716357,3.88789899 C23.991904,-0.934956479 31.4499696,0.0915048357 31.4499696,0.0915048357 C32.3060277,0.148075993 33,0.896571399 33,1.75342768 L33,27.6405031 C33,28.5017866 32.2923865,29.1338035 31.4294605,29.0865154 C31.4294605,29.0865154 23.4983856,27.9708073 18,33 C12.2081588,27.9708073 4.5516953,29.0856637 4.5516953,29.0856637 C3.69471765,29.148807 3,28.4888506 3,27.6328257 L3,1.99830772 C3,1.13278414 3.69703572,0.349873821 4.56016167,0.287022515 C4.56016167,0.287022515 11.69012,-0.934956438 17.716357,3.88789899 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="30" height="33" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Main-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1248-px" transform="translate(-517.000000, -593.000000)">
+            <g id="Popular-Advices" transform="translate(158.000000, 555.000000)">
+                <g id="Group-10" transform="translate(360.000000, 33.000000)">
+                    <g id="Group-9" transform="translate(0.000000, 5.000000)">
+                        <path d="M2.85403463,3 L1.38061722,3 C0.613334692,3 0,3.657096 0,4.467665 L0,30.1355153 C0,30.9520209 0.807317074,32.0814191 1.56771493,32.0814191 L14.4486465,32.0814191 C14.9799911,33.3765599 16.1335383,34 17.5455227,34 C18.9575072,34 19.9834068,33.3765599 20.5147514,32.0814191 L34.498085,32.0814191 C35.257868,32.0814191 36,30.9460843 36,30.1355153 L36,4.467665 C36,3.65115937 35.384831,3 34.6259817,3 L33.3342321,3" id="Combined-Shape" stroke="#BBCBD1" stroke-width="2"></path>
+                        <use id="Rectangle-106" stroke="#BBCBD1" mask="url(#mask-2)" stroke-width="4" xlink:href="#path-1"></use>
+                        <rect id="Rectangle-107" fill="#BBCBD1" x="17" y="5" width="2" height="26"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

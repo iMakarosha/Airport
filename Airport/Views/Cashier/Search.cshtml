@@ -1,0 +1,137 @@
+﻿@using Airport.Models.AircraftFleet; 
+@using Airport.Handlers;
+@model Airport.ViewModels.SearchViewModel
+@{
+    ViewData["Title"] = "Search";
+}
+<section class="main-filter">
+    <form class="row">
+        <div class="col-xs-12 col-md-10">
+            <div class="form-row">
+                <div class="form-group col-xs-12 col-md-3">
+                    <input placeholder="Откуда" type="email" class="form-control input-bg" id="inputEmail">
+                </div>
+                <div class="form-group col-xs-12 col-md-3">
+                    <input placeholder="Куда" type="password" class="form-control input-bg" id="inputPassword">
+                </div>
+                <div class="form-group col-xs-12 col-md-3">
+                    <input placeholder="Когда" type="date" class="form-control input-bg" id="inputDate">
+                </div>
+                <div class="form-group col-xs-12 col-md-3">
+                    <select class="form-control input-bg" id="ServiceClass">
+                        @foreach (var enumValue in Enum.GetValues(typeof(ServiceClass)))
+                        {
+                            <option value="@(enumValue)">
+                                @EnumExtensions.GetDisplayName((ServiceClass)enumValue)
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>                
+        <div class="form-group button-block col-xs-12 col-md-2">
+            <button type="submit" class="btn btn-bg btn-orange">Найти билеты</button>
+        </div>
+    </form>
+</section>
+
+<section class="offers">
+    <div class="row">
+        <div class="custom-filter col-xs-12 col-md-4">
+            <form class="bg4 b-shd-common">
+                <div class="filter-item">
+                    <a class="bold uppercase l1" data-toggle="collapse" href="#filter1" role="button" aria-expanded="true" aria-controls="filter1">
+                        Авиакомпания
+                    </a>
+                    <div class="collapse show" id="filter1">
+                        <div class="filter-item-values">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-item">
+                    <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter2" role="button" aria-expanded="false" aria-controls="filter1">
+                        Цена билета
+                    </a>
+                    <div class="collapse" id="filter2">
+                        <div class="filter-item-values">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-item">
+                    <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter3" role="button" aria-expanded="false" aria-controls="filter1">
+                        Аэропорт
+                    </a>
+                    <div class="collapse" id="filter3">
+                        <div class="filter-item-values">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-buttons flex-row">
+                    <button class="btn btn-sm btn-orange" type="submit">Применить</button>
+                    <button class="btn btn-sm btn-white2" type="reset">Сбросить все</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-md-8">
+            @foreach (var flightItem in Model.Flights)
+            {
+                <div class="offer-items bg4 b-shd-common">
+                    <div class="row">
+                        <div class="col-xs-9 col-md-9">
+                            <div>
+                                <img src="~/img/aircraft_logo/@(flightItem.AirlineId).png" />
+                            </div>
+                            <div class="flex-row">
+                                <div class="form-group col-xs-3 col-md-3">
+                                    <div class="font-lg">@flightItem.StartingPoint.DateTime.ToShortTimeString()</div>
+                                    <div class="font-xs t6">
+                                        @flightItem.StartingPoint.City, @flightItem.StartingPoint.Country
+                                        <br />
+                                        @flightItem.StartingPoint.DateTime.ToShortDateString(), @flightItem.StartingPoint.DateTime.DayOfWeek
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-6 col-md-6">
+                                    <div class="flex aircraft-progres">
+                                        <span class="aircraft-up">
+                                            &#9992;
+                                        </span>
+                                        <span class="font-xs t6">В пути @(flightItem.StartingPoint.DateTime.Subtract(flightItem.StartingPoint.DateTime))</span>
+                                        <span class="aircraft-down">
+                                            &#9992;
+                                        </span>
+                                    </div>
+                                    <div class="aircraft-path bg6"></div>
+                                </div>
+                                <div class="form-group col-xs-3 col-md-3">
+                                    <div class="font-lg">@flightItem.TermitationPoint.DateTime.ToShortTimeString()</div>
+                                    <div class="font-xs t6">
+                                        @flightItem.TermitationPoint.City, @flightItem.TermitationPoint.Country
+                                        <br />
+                                        @flightItem.TermitationPoint.DateTime.ToShortDateString(), @flightItem.TermitationPoint.DateTime.DayOfWeek
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                @flightItem.Name
+                                @flightItem.Returnable
+                                @flightItem.Cancellble
+                                @flightItem.Aircraft.Model
+                                @flightItem.AirlineName
+                                @flightItem.BaggageDimensions
+                                @flightItem.ServiceClass.GetDisplayName()
+                            </div>
+                        </div>
+                        <div class="col-xs-3 col-md-3">
+                            <div class="">
+                                <button class="btn btn-orange offer-buy">@flightItem.Cost<br/>Оформить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

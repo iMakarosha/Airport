@@ -1,4 +1,9 @@
-﻿.l1 {
+﻿a {
+  color: #0d6ef0; }
+  a:hover {
+    color: #0a58c0; }
+
+.l1 {
   color: #0c131d; }
   .l1:hover {
     color: #0d6ef0; }
@@ -57,7 +62,7 @@
   background-color: #a0abb8; }
 
 .bg7 {
-  background-color: #eff1f4; }
+  background-color: #f3f5f7; }
 
 .btn-blue {
   background-color: #0d6ef0;

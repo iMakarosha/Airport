@@ -5,6 +5,11 @@
     text-transform: uppercase;
 }
 
+.b-shd-common {
+    box-shadow: 0 1px 5px rgba(0,0,0,.15);
+    border-radius: 5px;
+}
+
 .text-c{
     text-align: center;
 }
@@ -16,7 +21,7 @@
 }
 
 .font-xs{
-    font-size: 11px;
+    font-size: 12px;
 }
 .font-sm{
     font-size: 14px;
@@ -52,6 +57,24 @@
     font-size: 13px;
     font-weight: 500;
     padding: 10px 16px;
+}
+.btn-bg {
+    font-size: 17px;
+    font-weight: 500;
+    padding: 16px;
+}
+
+.input-bg {
+    font-size: 17px;
+    padding: 16px;
+
+    &.form-control {
+        height: auto;
+    }
+    &[type="date"]{
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
 }
 
 
