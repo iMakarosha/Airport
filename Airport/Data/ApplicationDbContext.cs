@@ -15,6 +15,7 @@ namespace Airport.Data
 
         public DbSet<BonusCard> BonusCards { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<Document> Document{ get; set; }
 
         public DbSet<Position> Positions { get; set; }
         public DbSet<Employee> Employees{ get; set; }

@@ -12,7 +12,7 @@
 </head>
 <body class="bg7">
     <header>
-        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark border-bottom box-shadow mb-3 bg1 t4">
+        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark border-bottom box-shadow bg1 t4">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Airport</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,8 +28,8 @@
 
                         </li>
                         @*<li class="nav-item">
-                            <a class="nav-link l4" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
+                                <a class="nav-link l4" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>*@
                         <li class="nav-item">
                             <a class="nav-link l4" asp-area="" asp-controller="Home" asp-action="About" title="Info">Справка</a>
                         </li>
@@ -39,10 +39,12 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="body-item pt-3">
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted bg5">
@@ -55,6 +57,7 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

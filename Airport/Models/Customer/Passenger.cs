@@ -18,8 +18,6 @@ namespace Airport.Models.Customer
         public string Surname { get; set; }
         [MaxLength(100)]
         public string Patronumic { get; set; }
-        [MaxLength(80)]
-        public string SecondName { get; set; }
         [Required]
         [StringLength(11, MinimumLength = 11)]
         public string Phone { get; set; }

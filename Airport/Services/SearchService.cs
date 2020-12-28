@@ -37,7 +37,7 @@ namespace Airport.Services
             return result;
         }
 
-        public IEnumerable<FlightByRate> GetSearchViewModel(FilterMain filter, FilterCustom filterCustom)
+        public IQueryable<FlightByRate> GetSearchViewModel(FilterMain filter)
         {
             try
             {
@@ -65,6 +65,7 @@ namespace Airport.Services
                                   FlightId = f.Id,
                                   RateId = r.Id,
                                   Aircraft = a,
+                                  AircraftModel = am.Model,
                                   AirlineId = airl.Id,
                                   AirlineName = airl.Name,
                                   Name = r.Name,
@@ -84,12 +85,12 @@ namespace Airport.Services
                                                 select t.Id).Count()
                               });
 
-                if (!new FilterHandler().IsEmptyFilter(filterCustom))
-                {
-                    result = result.Where(a => a.AirlineId == filterCustom.AirlineId);
-                }
+                //if (!new FilterHandler().IsEmptyFilter(filterCustom))
+                //{
+                //    result = result.Where(a => a.AirlineId == filterCustom.AirlineId);
+                //}
 
-                return result.ToList();
+                return result;
                
             }
             catch(Exception ex)
@@ -97,5 +98,6 @@ namespace Airport.Services
                 return null;
             }
         }
+
     }
 }

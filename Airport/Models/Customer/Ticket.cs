@@ -21,7 +21,7 @@ namespace Airport.Models.Customer
         public int PassengerId { get; set; }
         public Passenger Passenger { get; set; }
         [Required]
-        public int CashierId { get; set; }
+        public string CashierId { get; set; }
         public Employee Cashier{ get; set; }
         public string PaymentInfo { get; set; }
         [Required]

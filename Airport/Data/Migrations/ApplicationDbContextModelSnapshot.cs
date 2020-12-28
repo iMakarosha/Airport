@@ -231,10 +231,6 @@ namespace Airport.Data.Migrations
                         .HasColumnType("nvarchar(11)")
                         .HasMaxLength(11);
 
-                    b.Property<string>("SecondName")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
-
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
@@ -254,7 +250,11 @@ namespace Airport.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CashierId")
+                    b.Property<string>("CashierId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CashierId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateTime")
@@ -274,7 +274,7 @@ namespace Airport.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CashierId");
+                    b.HasIndex("CashierId1");
 
                     b.HasIndex("FlightId");
 
@@ -747,9 +747,7 @@ namespace Airport.Data.Migrations
                 {
                     b.HasOne("Airport.Models.Worker.Employee", "Cashier")
                         .WithMany()
-                        .HasForeignKey("CashierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CashierId1");
 
                     b.HasOne("Airport.Models.Flight.Flight", "Flight")
                         .WithMany()

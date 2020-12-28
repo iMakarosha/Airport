@@ -12,7 +12,7 @@ namespace Airport.ViewModels
     {
         public FilterMain FilterMain { get; set; } 
         public FilterCustom FilterCustom { get; set; }
-        public List<FlightByRate> Flights { get; set; }
+        public IQueryable<FlightByRate> Flights { get; set; }
         public List<ServiceClassesFilter> ServiceClass { get; set; }
 
     }
@@ -46,6 +46,7 @@ namespace Airport.ViewModels
         public int FlightId { get; set; }
         public int RateId { get; set; }
         public Aircraft Aircraft { get; set; }
+        public string AircraftModel { get; set; }
         public int AirlineId { get; set; }
         public string AirlineName { get; set; }
         public Waypoint StartingPoint { get; set; }

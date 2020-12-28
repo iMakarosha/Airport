@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Airport.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Airport.Data;
+using System.Text;
 
 namespace Airport
 {
@@ -18,6 +19,8 @@ namespace Airport
     {
         public static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {

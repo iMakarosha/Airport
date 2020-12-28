@@ -76,6 +76,14 @@
         padding-bottom: 15px;
     }
 }
+.input-md {
+    font-size: 17px;
+    padding: 14px;
+
+    &.form-control {
+        height: auto;
+    }
+}
 
 
 .b-r-4{

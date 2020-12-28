@@ -64,6 +64,12 @@
     padding-top: 15px;
     padding-bottom: 15px; }
 
+.input-md {
+  font-size: 17px;
+  padding: 14px; }
+  .input-md.form-control {
+    height: auto; }
+
 .b-r-4 {
   border-radius: 4px; }
 
