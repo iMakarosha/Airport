@@ -8,6 +8,7 @@ using Airport.ViewModels;
 using Airport.Services;
 using Airport.Data;
 using Airport.Handlers;
+using Airport.Models.Customer;
 
 namespace Airport.Controllers
 {
@@ -22,7 +23,7 @@ namespace Airport.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(new ManualFilters());
         }
 
         public IActionResult Search(FilterMain filterMain)
@@ -67,6 +68,70 @@ namespace Airport.Controllers
             return PartialView("_Filters");
         }
 
+
+        public IActionResult FlightInfo(FlightByFilter model)
+        {
+            return PartialView("_FlightInfo", model);
+        }
+        
+        public IActionResult FlightsByFilter()
+        {
+            var model = new CashierService(db).GetFlightsByFilter();
+            return PartialView("_FlightsByFilter", model);
+        }
+        [HttpPost]
+        public IActionResult FlightsByFilter(FlightFilter filter)
+        {
+            var model = new CashierService(db).GetFlightsByFilter(filter);
+            return PartialView("_FlightsByFilter", model);
+        }
+
+        public IActionResult PassengersByFilter()
+        {
+            var model = new CashierService(db).GetPassengersByFilter();
+            return PartialView("_PassengersByFilter", model);
+        }
+
+        [HttpPost]
+        public IActionResult PassengersByFilter(PassengerFilter filter)
+        {
+            var model = new CashierService(db).GetPassengersByFilter(filter);
+            return PartialView("_PassengersByFilter", model);
+        }
+        public IActionResult TicketsByFilter()
+        {
+            var model = new CashierService(db).GetTicketsByFilter();
+            return PartialView("_TicketsByFilter", model);
+        }
+
+        [HttpPost]
+        public IActionResult TicketsByFilter(TicketFilter filter)
+        {
+            var model = new CashierService(db).GetTicketsByFilter(filter);
+            return PartialView("_TicketsByFilter", model);
+        }
+        
+        [HttpPost]
+        public IActionResult TicketRemove(int ticketId, int pageIdent, string pageName)
+        {
+            new TicketHandler(db).RemoveTicket(ticketId);
+            switch (pageName)
+            {
+                case "FlightsItem":
+                    return RedirectToAction("FlightsItem", "Cashier", new { flightId = pageIdent });
+                case "PassengerItem":
+                    return RedirectToAction("PassengerItem", "Cashier", new { passengerId = pageIdent });
+                default:
+                    return RedirectToAction("Index", "Cashier");
+            }
+        }
+        [HttpGet]
+        public IActionResult FlightsItem(int flightId)
+        {
+            var model = new CashierService(db).GetFlightsItem(flightId);
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult AddTicket(int FlightId, int RateId)
         {
@@ -80,8 +145,10 @@ namespace Airport.Controllers
             //проверить, сохранить, редиректнуть на "Спасибо"
             ticket.CashierName = User.Identity.Name;
             var result = new TicketService(db).AddNewTicket(ticket);
-            if (result == "Ok")
+            if (result.IndexOf("Ok") == 0)
             {
+                string[] resultItems = result.Split(",");
+                new TicketHandler(db).WaitPaymentAsync(Convert.ToInt32(resultItems[1]));
                 return RedirectToAction("Success");
             }
             else
@@ -89,6 +156,34 @@ namespace Airport.Controllers
                 return RedirectToAction("Error");
             }
         }
+
+        [HttpGet]
+        public IActionResult PassengerItem(int passengerId)
+        {
+            PassengerFullInfo model = new CashierService(db).GetPassengersItem(passengerId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult PassengerItem(UpdatePassenger passengerItem)
+        {
+            var result = new CashierService(db).SavePassenger(passengerItem);
+            return RedirectToAction("PassengerItem", "Cashier", new { passengerId = passengerItem.PassengerId });
+        }
+        [HttpGet]
+        public IActionResult TicketItem(int ticketId)
+        {
+            var model = new CashierService(db).GetTicketsItem(ticketId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult TicketPaid(int ticketId)
+        {
+            new TicketService(db).UpdateTicket(ticketId);
+            return RedirectToAction("TicketItem", "Cashier", new { ticketId });
+        }
+
         public IActionResult Error()
         {
             return View();
@@ -97,10 +192,7 @@ namespace Airport.Controllers
         {
             return View();
         }
-        public IActionResult Passengers()
-        {
-            return View();
-        }
+       
 
         public IActionResult Report()
         {

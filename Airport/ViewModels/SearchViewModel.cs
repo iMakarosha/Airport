@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Airport.Models;
 using Airport.Models.Flight;
 using Airport.Models.AircraftFleet;
+using Airport.Models.Customer;
 
 namespace Airport.ViewModels
 {
@@ -12,7 +13,7 @@ namespace Airport.ViewModels
     {
         public FilterMain FilterMain { get; set; } 
         public FilterCustom FilterCustom { get; set; }
-        public IQueryable<FlightByRate> Flights { get; set; }
+        public IQueryable<FlightByFilter> Flights { get; set; }
         public List<ServiceClassesFilter> ServiceClass { get; set; }
 
     }
@@ -41,7 +42,7 @@ namespace Airport.ViewModels
         public bool Returnable { get; set; }
     }
 
-    public class FlightByRate
+    public class FlightByFilter
     {
         public int FlightId { get; set; }
         public int RateId { get; set; }
@@ -58,7 +59,35 @@ namespace Airport.ViewModels
         public string BaggageDimensions { get; set; }
         public ServiceClass ServiceClass { get; set; }
         public int LeftPlaces { get; set; }
-        //public int AllPlaces { get; set; }
-        //public int OccupiedPlaces { get; set; }
+    }
+
+    public class ManualFilters
+    {
+        public FlightFilter FlightFilter { get; set; }
+        public TicketFilter TicketFilter { get; set; }
+        public PassengerFilter PassengerFilter { get; set; }
+    }
+
+    public class FlightFilter
+    {
+        public string StartingPoint { get; set; }
+        public string TermitationPoint { get; set; }
+        public DateTime Date { get; set; }
+    }
+
+    public class TicketFilter
+    {
+        public DateTime Date { get; set; }
+        public int TicketId { get; set; }
+        public string PassengerSurname { get; set; }
+        public string PassengerDocumentValue { get; set; }
+
+    }
+    public class PassengerFilter
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string DocumentValue { get; set; }
+        public string Email { get; set; }
     }
 }

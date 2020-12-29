@@ -109,7 +109,9 @@ header .navbar .nav-link.btn {
     padding-right: 0;
     width: 100%; }
   .main-filter select.form-control {
-    height: 100px; }
+    height: 59px;
+    padding-top: 6px;
+    padding-bottom: 6px; }
 
 .custom-filter .filter-item {
   border-bottom: 1px solid #f3f5f7; }
@@ -138,9 +140,16 @@ header .navbar .nav-link.btn {
 .aircraft-down {
   transform: rotate(45deg); }
 
+.rate-not-paid {
+  opacity: .5;
+  background-color: #eee; }
+
 .offer-items {
   margin-bottom: 30px;
   padding: 10px 16px; }
+  .offer-items.offer-disable {
+    opacity: .5;
+    background-color: #eee; }
   .offer-items .aircraft-up, .offer-items .aircraft-down {
     display: inline-block;
     font-size: 18px; }
@@ -181,63 +190,103 @@ header .navbar .nav-link.btn {
 .check-info:before {
   content: '\2755'; }
 
-.add-ticket .add-ticket-head {
+.add-ticket .add-list-footer {
+  margin-top: 20px; }
+  .add-ticket .add-list-footer .flex {
+    justify-content: space-between; }
+
+.list-head {
   padding: 10px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between; }
 
-.add-ticket .add-ticket-info {
-  margin: 0 0 20px 0;
-  padding: 16px 0 0; }
+.rate-items {
+  margin: 0 -6px -12px; }
+  .rate-items .col-xs-6.col-md-4 {
+    padding: 0 6px 12px; }
 
-.add-ticket .aircraft-up, .add-ticket .aircraft-down {
-  display: inline-block;
-  background: #eee;
-  border-radius: 50px;
-  padding: 6px 8px;
-  font-size: 24px;
-  margin: 0 15px; }
-
-.add-ticket .aircraft-progres .flex-row {
-  margin-bottom: 10px; }
-  .add-ticket .aircraft-progres .flex-row div:first-child {
-    width: 25%; }
-  .add-ticket .aircraft-progres .flex-row .progres-bar {
-    width: 4px;
-    height: 70px;
-    background-color: #eee;
-    margin-top: -18px;
-    margin-bottom: -18px;
-    margin-left: 32px; }
-
-.add-ticket .rate-items {
-  margin: 0 -6px; }
-  .add-ticket .rate-items .col-xs-6.col-md-4 {
-    padding: 0 6px; }
-
-.add-ticket .rate-item {
+.rate-item {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 10px; }
-  .add-ticket .rate-item .flex-row {
+  .rate-item .flex-row {
     align-items: center; }
-    .add-ticket .rate-item .flex-row label {
+    .rate-item .flex-row label, .rate-item .flex-row div.mb-0 {
       padding-left: 10px;
       font-size: 16px;
       width: 100%;
       cursor: pointer; }
-  .add-ticket .rate-item .rate-item-about {
+  .rate-item .rate-item-about {
     margin-left: 5px; }
 
-.add-ticket .add-ticket-footer {
-  margin-top: 20px; }
-  .add-ticket .add-ticket-footer .flex {
-    justify-content: space-between; }
+.passengers-tab .list-item {
+  padding-bottom: 16px; }
+
+.list-info {
+  margin: 0 0 20px 0;
+  padding: 16px 0 0; }
+  .list-info .aircraft-up, .list-info .aircraft-down {
+    display: inline-block;
+    background: #eee;
+    border-radius: 50px;
+    padding: 6px 8px;
+    font-size: 24px;
+    margin: 0 15px; }
+  .list-info .aircraft-progres .flex-row {
+    margin-bottom: 10px; }
+    .list-info .aircraft-progres .flex-row div:first-child {
+      width: 25%; }
+    .list-info .aircraft-progres .flex-row .progres-bar {
+      width: 4px;
+      height: 70px;
+      background-color: #eee;
+      margin-top: -18px;
+      margin-bottom: -18px;
+      margin-left: 32px; }
+
+.list-item {
+  margin: 16px 0;
+  border: 1px solid #ddd;
+  padding: 8px 0;
+  border-radius: 4px; }
+  .list-item .row > div {
+    margin-bottom: 10px; }
+  .list-item .list-payment-status .check-false:before, .list-item .list-payment-status .check-true:before {
+    font-size: 34px; }
+  .list-item .bold {
+    font-size: 15px;
+    padding-bottom: 4px;
+    margin-top: 8px; }
+  .list-item .list-item-name, .list-item .list-item-value {
+    display: inline-block;
+    padding-top: 2px; }
+  .list-item .list-item-name {
+    width: 30%; }
+    .list-item .list-item-name ~ .list-item-value {
+      width: calc(70% - 10px);
+      padding-left: 10px; }
+  .list-item .list-item-button {
+    width: 49%;
+    padding-bottom: 4px;
+    display: inline-block; }
+    .list-item .list-item-button button, .list-item .list-item-button a {
+      width: 100%; }
 
 @media (min-width: 768px) {
   .main-filter .form-group {
     margin-bottom: 0; }
     .main-filter .form-group.button-block {
-      padding-left: 0; } }
+      padding-left: 0; }
+  .list-item .list-item-button {
+    width: 100%; }
+  .list-item .list-payment-status {
+    text-align: center; } }
+
+.manual-filters .tab-pane {
+  padding-top: 16px; }
+
+.manual-filters .nav-link {
+  font-size: 18px;
+  padding: 10px 24px; }

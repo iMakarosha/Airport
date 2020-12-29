@@ -22,53 +22,15 @@ namespace Airport.Services
         {
             db = context;
         }
-        public List<EnumList> GetEnumList(string enumName)
-        {
-            var result = new List<EnumList>();
-            switch (enumName)
-            {
-                case "Age":
-                    foreach (var item in Enum.GetValues(typeof(Age)))
-                    {
-                        result.Add(new EnumList
-                        {
-                            Value = Convert.ToInt32(item),
-                            Name = EnumExtensions.GetDisplayName((Age)item)
-                        });
-                    }
-                    break;
-                case "Gender":
-                    foreach (var item in Enum.GetValues(typeof(Gender)))
-                    {
-                        result.Add(new EnumList
-                        {
-                            Value = Convert.ToInt32(item),
-                            Name = EnumExtensions.GetDisplayName((Gender)item)
-                        });
-                    }
-                    break;
-                case "Document":
-                    foreach (var item in Enum.GetValues(typeof(DocumentType)))
-                    {
-                        result.Add(new EnumList
-                        {
-                            Value = Convert.ToInt32(item),
-                            Name = EnumExtensions.GetDisplayName((DocumentType)item)
-                        });
-                    }
-                    break;
-            }
-            
-            return result;
-        }
+        
         public AddTicketViewModel GetTicketViewModel(int flightId, int rateId)
         {
             AddTicketViewModel result = new AddTicketViewModel();
             result.FlightId = flightId;
             result.RateId = rateId;
-            result.Ages = GetEnumList("Age");
-            result.Genders = GetEnumList("Gender");
-            result.Documents = GetEnumList("Document");
+            result.Ages = EnumExtensions.GetEnumList("Age");
+            result.Genders = EnumExtensions.GetEnumList("Gender");
+            result.Documents = EnumExtensions.GetEnumList("Document");
 
             result.TicketInfo = (from f in db.Flights
                                  join fr in db.Flight_Rates on f.Id equals fr.FlightId
@@ -79,7 +41,7 @@ namespace Airport.Services
                                  join wp1 in db.Waypoints on f.StartingPointId equals wp1.Id
                                  join wp2 in db.Waypoints on f.TermitationPointId equals wp2.Id
                                  where f.Id == flightId & r.Id == rateId
-                                 select new FlightByRate
+                                 select new FlightByFilter
                                  {
                                      FlightId = f.Id,
                                      RateId = r.Id,
@@ -113,7 +75,6 @@ namespace Airport.Services
 
             return result;
         }
-
         public string AddNewTicket(NewTicket ticketInfo)
         {
             try
@@ -197,18 +158,59 @@ namespace Airport.Services
                     });
                     db.SaveChanges();
                 }
-
-                db.Tickets.Add(new Ticket
+                Ticket newTicket = new Ticket
                 {
                     CashierId = cashierId,
                     DateTime = DateTime.Now,
                     FlightId = ticketInfo.FlightId,
                     PassengerId = passengerId,
                     RateId = ticketInfo.RateId
-                });
+                };
+                db.Tickets.Add(newTicket);
 
                 db.SaveChanges();
+                return "Ok," + newTicket.Id.ToString() + "," + ticketInfo.Passenger.Email;
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string UpdateTicket(int ticketId)
+        {
+            try
+            {
+                Ticket updatedTicket = db.Tickets.Where(t => t.Id == ticketId).Select(t => t).First();
+                updatedTicket.PaymentInfo = "Номер карты: **** " + (""+updatedTicket.Id + updatedTicket.PassengerId + updatedTicket.RateId + updatedTicket.Id).ToString().Substring(0, 4);
+                db.Tickets.Update(updatedTicket);
+                db.SaveChanges();
                 return "Ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
+        public string TryRemoveTicket(int ticketId, bool triggerRemove)
+        {
+            try
+            {
+                Ticket ticket = db.Tickets.Where(t => t.Id == ticketId).Select(t => t).First();
+
+                if ((String.IsNullOrEmpty(ticket.PaymentInfo) && triggerRemove) || !triggerRemove)
+                {
+                    string passengerEmail = db.Passengers.Where(p=>p.Id == ticket.PassengerId).Select(p=>p.Email).First();
+                    db.Tickets.Remove(ticket);
+                    db.SaveChanges();
+                    return "Ok," + passengerEmail;
+                }
+                else {
+                    return null;
+                }
+
             }
             catch(Exception ex)
             {

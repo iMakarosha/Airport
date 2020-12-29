@@ -37,7 +37,7 @@ namespace Airport.Services
             return result;
         }
 
-        public IQueryable<FlightByRate> GetSearchViewModel(FilterMain filter)
+        public IQueryable<FlightByFilter> GetSearchViewModel(FilterMain filter)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace Airport.Services
                                     EF.Functions.Like(f.TermitationPoint.City, "%" + filter.TermitationPoint + "%") &
                                     f.StartingPoint.DateTime.Date == filter.Date
 
-                              select new FlightByRate
+                              select new FlightByFilter
                               {
                                   FlightId = f.Id,
                                   RateId = r.Id,

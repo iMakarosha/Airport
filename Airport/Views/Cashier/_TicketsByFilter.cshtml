@@ -1,0 +1,92 @@
+﻿@model List<Airport.ViewModels.TicketFull>
+
+@if (Model == null)
+    {
+        <p>Заполните параметры поиска</p>
+    }
+    else
+    {
+        if (Model.Count == 0)
+        {
+            <p>Не удалось найти подходящего рейса, попробуйте изменить параметры</p>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <div class="bg4 b-shd-common @(String.IsNullOrEmpty(item.PaymentInfo)?"rate-not-paid":"rate-paid")">
+                    <div class="row list-item">
+                        <div class="col-xs-11 col-sm-11 col-md-9">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-md-8">
+                                    <div class="bold uppercase">Пассажир</div>
+                                    <div>
+                                        <div class="list-item-name">Имя</div>
+                                        <div class="list-item-value">@item.Passenger.Name @item.Passenger.Surname</div>
+                                    </div>
+                                    <div>
+                                        <div class="list-item-name">@item.Passenger.Documents[0].DocumentType</div>
+                                        <div class="list-item-value">@item.Passenger.Documents[0].Value</div>
+                                    </div>
+                                    <div>
+                                        <div class="list-item-name">Email</div>
+                                        <div class="list-item-value">@item.Passenger.Email</div>
+                                    </div>
+                                    <div>
+                                        <div class="list-item-name">Phone</div>
+                                        <div class="list-item-value">@item.Passenger.Phone</div>
+                                    </div>
+                                    @if (!String.IsNullOrEmpty(item.PaymentInfo))
+                                    {
+                                        <div class="list-item-name">Оплата</div>
+                                        <div class="list-item-value">@item.PaymentInfo</div>
+                                    }
+
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="bold uppercase">Тариф</div>
+                                    <div>
+                                        <div class="list-item-value">@item.Rate.Name</div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-8 col-md-8">
+                                    <div class="bold uppercase">Кассир</div>
+                                    <div>
+                                        <div class="list-item-name">Email</div>
+                                        <div class="list-item-value">@item.CashierName</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="bold uppercase">Дата оформ.</div>
+                                    <div>
+                                        <div class="list-item-value">@item.Date</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3">
+                            <div>
+                                <div class="list-payment-status mb-3 flex-row" style="justify-content: space-between;">
+                                    <div class="bold">Pay</div>
+
+                                    @if (String.IsNullOrEmpty(item.PaymentInfo))
+                                    {
+                                        <div class="check-false"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="check-true"></div>
+                                    }
+                                </div>
+                                <div class="list-item-button">
+                                    <a class="btn btn-orange" asp-area="" asp-controller="Cashier" asp-action="TicketItem" asp-route-ticketId="@item.Id">Перейти к билету</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }

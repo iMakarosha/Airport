@@ -12,11 +12,20 @@ using Airport.ViewModels;
 using System.Diagnostics;
 using System.Net.Mail;
 using System.Net;
+using System.Threading;
+using Airport.Services;
+using Airport.Data;
 
 namespace Airport.Handlers
 {
     public class TicketHandler
     {
+        ApplicationDbContext db;
+
+        public TicketHandler(ApplicationDbContext context)
+        {
+            db = context;
+        }
         //public void PrintTicketPdf(TicketInfo ticket)
         public string PrintTicketPdf()
         {
@@ -97,7 +106,7 @@ namespace Airport.Handlers
         }
        
         //public void SentTicket(TicketInfo ticket)
-        public string SentTicket()
+        public string SendTicket()
         {
             string code = "";
 
@@ -119,7 +128,7 @@ namespace Airport.Handlers
             return code;
         }
 
-        public string SentTicketCancel()
+        public string SendTicketCancel(string passengerEmail)
         {
             string code = "";
 
@@ -127,18 +136,37 @@ namespace Airport.Handlers
             smtpClient.Credentials = new NetworkCredential("rosavtodorcza@mail.ru", "tararaKota1235");
 
             //MailAddress to = new MailAddress("email");
-            MailAddress to = new MailAddress("prince-zuko27@yandex.ru");
+            MailAddress to = new MailAddress(passengerEmail);
             MailAddress from = new MailAddress("rosavtodorcza@mail.ru", "Авиаперевозки Airport");
             MailMessage message = new MailMessage(from, to);
             message.Subject = "Отмена брони билета на самолет - Airport";
             message.IsBodyHtml = true;
             message.Body = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'></head><body><h2>Ваша бронь отменена</h2>" +
                 "<p>Это могло произойти из-за истечения времени оплаты. В случае, если вы готовы оплатить билет, оформите его еще раз.</p><br/><p>Возникли вопросы? Напишите нам: rosavtodorcza@mail.ru</p><p style='text-align:right'>" + DateTime.Now + "</p></body></html>";
-            message.Attachments.Add(new Attachment(PrintTicketPdf()));
+            //message.Attachments.Add(new Attachment(PrintTicketPdf()));
             smtpClient.EnableSsl = true;
 
             smtpClient.Send(message);
             return code;
+        }
+
+        public async Task WaitPaymentAsync(int ticketId)
+        {
+            await Task.Run(() => Thread.Sleep(1000 * 60 * 3));
+            string result = new TicketService(db).TryRemoveTicket(ticketId, true);
+            if (result.IndexOf("Ok") != -1)
+            {
+                SendTicketCancel(result.Substring(3));
+            }
+        }
+
+        public void RemoveTicket(int ticketId, bool triggerRemove = false)
+        {
+            string result = new TicketService(db).TryRemoveTicket(ticketId, triggerRemove);
+            if (result.IndexOf("Ok")!=-1)
+            {
+                SendTicketCancel(result.Substring(3));
+            }
         }
     }
 }

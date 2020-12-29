@@ -1,0 +1,64 @@
+﻿@model Airport.ViewModels.FlightByFilter
+<div class="list-head bg6">
+    <div>
+        <img src="~/img/aircraft_logo/@(Model.AirlineId).png" />
+    </div>
+    <div>
+        <a href="#" class="l4">Подробнее о возврате и отмене</a>
+    </div>
+</div>
+
+<div class="bg4 row list-info">
+    <div class="form-group col-xs-12 col-md-8">
+        <div class="flex-column aircraft-progres">
+            <div class="flex-row">
+                <div>
+                    <div class="font-lg">@Model.StartingPoint.DateTime.ToShortTimeString()</div>
+                    <div class="font-sm t6">
+                        @Model.StartingPoint.DateTime.ToShortDateString(), @Model.StartingPoint.DateTime.DayOfWeek
+                    </div>
+                </div>
+                <div>
+                    <span class="aircraft-up">
+                        &#9992;
+                    </span>
+                </div>
+                <div>
+                    <span class="font-lg">@Model.StartingPoint.City</span><span class="t6">, @Model.StartingPoint.Country</span>
+                    <div class="t6">@Model.StartingPoint.Airport</div>
+                </div>
+            </div>
+            <div class="flex-row">
+                <div>
+                    <span class="font-xs t6">В пути ........</span>
+                </div>
+                <div class="progres-bar"></div>
+            </div>
+            <div class="flex-row">
+                <div>
+                    <div class="font-lg">@Model.TermitationPoint.DateTime.ToShortTimeString()</div>
+                    <div class="font-sm t6">
+                        @Model.TermitationPoint.DateTime.ToShortDateString()<span class="t6">, @Model.TermitationPoint.DateTime.DayOfWeek</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="aircraft-down">
+                        &#9992;
+                    </span>
+                </div>
+                <div>
+                    <span class="font-lg">@Model.TermitationPoint.City</span><span class="t6">, @Model.TermitationPoint.Country</span>
+                    <div class="t6">@Model.TermitationPoint.Airport</div>
+                </div>
+            </div>
+        </div>
+        <div class="t6">Время вылета и прилета местное</div>
+    </div>
+    <div class="form-group col-xs-12 col-md-4">
+        <div class="text-c">
+            <img src="~/img/aircraft.svg" />
+            <div class="font-md bold p-t-sm">@Model.AirlineName</div>
+            <div>@Model.AircraftModel</div>
+        </div>
+    </div>
+</div>

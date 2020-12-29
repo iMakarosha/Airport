@@ -1,0 +1,168 @@
+﻿@model Airport.ViewModels.TicketFullInfo
+@using Airport.Handlers;
+@using Airport.ViewModels;
+@{
+    ViewData["Title"] = "Passenger item";
+}
+<div class="pb-3">
+    <a href="javascript:history.back()" class="l1-inv">&#8592; Назад</a>
+</div>
+<section class="add-ticket">
+    <div class="bg4 b-shd-common p-3 mt-4 mb-4">
+        <h5 class="font-md bold">
+            Билет
+        </h5>
+        <div class="row list-item">
+            <div class="col-xs-1 col-md-1">
+                <div class="list-payment-status">
+                    <div class="bold">Pay</div>
+
+                    @if (String.IsNullOrEmpty(Model.Ticket.PaymentInfo))
+                    {
+                        <div class="check-false"></div>
+                    }
+                    else
+                    {
+                        <div class="check-true"></div>
+                    }
+                </div>
+
+            </div>
+            <div class="col-xs-11 col-sm-11 col-md-9">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-md-8">
+                        <div class="bold uppercase">Пассажир</div>
+                        <div>
+                            <div class="list-item-name">Имя</div>
+                            <div class="list-item-value">@Model.Passenger.Name @Model.Passenger.Surname</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">@Model.Passenger.Documents[0].DocumentType</div>
+                            <div class="list-item-value">@Model.Passenger.Documents[0].Value</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">Email</div>
+                            <div class="list-item-value">@Model.Passenger.Email</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">Phone</div>
+                            <div class="list-item-value">@Model.Passenger.Phone</div>
+                        </div>
+                        @if (!String.IsNullOrEmpty(Model.Ticket.PaymentInfo))
+                        {
+                            <div class="list-item-name">Оплата</div>
+                            <div class="list-item-value">@Model.Ticket.PaymentInfo</div>
+                        }
+
+                    </div>
+                    <div class="col-xs-6 col-sm-2 col-md-2">
+                        <div class="bold uppercase">Тариф</div>
+                        <div>
+                            <div class="list-item-value">@Model.Ticket.Rate.Name</div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-6 col-sm-2 col-md-2">
+                        <div class="bold uppercase">Дата оформ.</div>
+                        <div>
+                            <div class="list-item-value">@Model.Ticket.Date</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-8">
+                        <div class="bold uppercase">Кассир</div>
+                        <div>
+                            <div class="list-item-name">Email</div>
+                            <div class="list-item-value">@Model.Ticket.CashierName</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="p-t-sm">
+                    @if (String.IsNullOrEmpty(Model.Ticket.PaymentInfo))
+                    {
+                    <div class="list-item-button">
+                        <form method="post" action="~/Cashier/TicketPaid">
+                            <input type="hidden" value="@Model.Ticket.Id" name="ticketId" />
+                            <input type="hidden" value="@Model.Passenger.Id" name="pageIdent" />
+                            <button type="submit" class="btn btn-blue">Подтвердить оплату</button>
+                        </form>
+                    </div>
+                    }
+                    
+                    <div class="list-item-button">
+                        <form method="post" action="~/Cashier/TicketRemove">
+                            <input type="hidden" value="@Model.Ticket.Id" name="ticketId" />
+                            <input type="hidden" value="@Model.Passenger.Id" name="pageIdent" />
+                            <button type="submit" class="btn btn-orange offer-buy">Удалить бронь</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+
+            <div class="mb-2">
+                <h5>Пассажир</h5>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-md-3">
+                        @Html.LabelFor(m => m.Passenger.Surname, new { placeholder = "Фамилия", @class = "form-control input-md" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        @Html.LabelFor(m => m.Passenger.Name, new { placeholder = "Имя", @class = "form-control input-md" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-2">
+                        @Html.LabelFor(m => m.Passenger.Patronumic, new { placeholder = "Отчество", @class = "form-control input-md" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-4">
+                        <div class="form-row">
+                            <div class="form-group mb-0 col-xs-12 col-md-6">
+                                @Html.DropDownListFor(m => m.Passenger.Gender, new SelectList(Model.Genders, "Value", "Name"), new { disabled = "disabled", @class = "form-control input-md" })
+                            </div>
+                            <div class="form-group mb-0 col-xs-12 col-md-6">
+                                @Html.DropDownListFor(m => m.Passenger.Age, new SelectList(Model.Ages, "Value", "Name"), new { disabled = "disabled", @class = "form-control input-md" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-3">
+                        @Html.LabelFor(m => m.Passenger.Citizenship, new { placeholder = "Гражданство", @class = "form-control input-md" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        @Html.DropDownListFor(m => m.Document.Type, new SelectList(Model.Documents, "Value", "Name"), new { disabled = "disabled", @class = "form-control input-md" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        @Html.LabelFor(m => m.Document.Value, new { placeholder = "0000 000000", @class = "form-control input-md" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        @Html.EditorFor(m => m.Passenger.Birthday, new { htmlAttributes = new { disabled = "disabled", @class = "form-control input-md" } })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        @Html.LabelFor(m => m.Passenger.Notes, new { placeholder = "Дополнительно", @class = "form-control input-md" })
+                    </div>
+                </div>
+            </div>
+            <div class="mb-2">
+                <h5>Контактная информация</h5>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-md-6">
+                        @Html.LabelFor(m => m.Passenger.Email, new { type = "email", placeholder = "E-mail", @class = "form-control input-md" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        @Html.LabelFor(m => m.Passenger.Phone, new { type = "text", placeholder = "79048548745", @class = "form-control input-md" })
+                    </div>
+                </div>
+            </div>
+            <div class="row add-list-footer">
+                <div class="col-xs-12 col-md-12 text-r">
+                    <form method="get" action="~/Cashier/PassengerItem">
+                        <input type="hidden" value="@Model.Passenger.Id" name="passengerId" />
+                        <button type="submit" class="btn btn-bg btn-blue">Изменить данные пассажира</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -183,8 +183,10 @@ header {
         width: 100%;
     }
 
-    select.form-control{
-        height: 100px;
+    select.form-control {
+        height: 59px;
+        padding-top: 6px;
+        padding-bottom: 6px;
     }
 }
 
@@ -227,9 +229,19 @@ header {
 .aircraft-down {
     transform: rotate(45deg);
 }
+.rate-not-paid {
+    opacity: .5;
+    background-color: #eee;
+}
+
 .offer-items {
     margin-bottom: 30px;
     padding: 10px 16px;
+
+    &.offer-disable {
+        opacity: .5;
+        background-color: #eee;
+    }
 
     .aircraft-up, .aircraft-down {
         display: inline-block;
@@ -291,18 +303,59 @@ header {
 }
 
 .add-ticket {
-    .add-ticket-head {
-        padding: 10px 16px;
-        display: flex;
-        flex-direction: row;
+    .add-list-footer {
+        margin-top: 20px;
+
+        .flex {
+            justify-content: space-between;
+        }
+    }
+}
+.list-head {
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rate-items {
+    margin: 0 -6px -12px;
+
+    .col-xs-6.col-md-4 {
+        padding: 0 6px 12px;
+    }
+}
+
+.rate-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+
+    .flex-row {
         align-items: center;
-        justify-content: space-between;
+
+        label, div.mb-0 {
+            padding-left: 10px;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+        }
     }
 
-    .add-ticket-info {
-        margin: 0 0 20px 0;
-        padding: 16px 0 0;
+    .rate-item-about {
+        margin-left: 5px;
     }
+}
+.passengers-tab {
+    .list-item {
+        padding-bottom: 16px;
+    }
+}
+
+.list-info {
+    margin: 0 0 20px 0;
+    padding: 16px 0 0;
 
     .aircraft-up, .aircraft-down {
         display: inline-block;
@@ -329,44 +382,56 @@ header {
             margin-left: 32px;
         }
     }
+}
 
-    .rate-items {
-        margin: 0 -6px;
+.list-item {
+    margin: 16px 0;
+    border: 1px solid #ddd;
+    padding: 8px 0;
+    border-radius: 4px;
 
-        .col-xs-6.col-md-4 {
-            padding: 0 6px;
+    .row > div {
+        margin-bottom: 10px;
+    }
+
+    .list-payment-status {
+
+        .check-false:before, .check-true:before {
+            font-size: 34px;
         }
     }
 
-    .rate-item {
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding: 10px;
+    .bold {
+        font-size: 15px;
+        padding-bottom: 4px;
+        margin-top: 8px;
+    }
 
-        .flex-row {
-            align-items: center;
+    .list-item-name, .list-item-value {
+        display: inline-block;
+        padding-top: 2px;
+    }
 
-            label {
-                padding-left: 10px;
-                font-size: 16px;
-                width: 100%;
-                cursor: pointer;
-            }
-        }
+    .list-item-name {
+        width: 30%;
 
-        .rate-item-about {
-            margin-left: 5px;
+        & ~ .list-item-value {
+            width: calc(70% - 10px);
+            padding-left: 10px;
         }
     }
 
-    .add-ticket-footer {
-        margin-top: 20px;
+    .list-item-button {
+        width: 49%;
+        padding-bottom: 4px;
+        display: inline-block;
 
-        .flex {
-            justify-content: space-between;
+        button, a {
+            width: 100%;
         }
     }
 }
+
 
 @media (min-width: 768px) {
     .main-filter {
@@ -378,5 +443,25 @@ header {
                 padding-left: 0;
             }
         }
+    }
+    .list-item {
+        .list-item-button {
+            width: 100%;
+        }
+
+        .list-payment-status {
+            text-align: center;
+        }
+    }
+}
+
+.manual-filters {
+    .tab-pane {
+        padding-top: 16px;
+    }
+
+    .nav-link {
+        font-size: 18px;
+        padding: 10px 24px;
     }
 }

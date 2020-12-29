@@ -13,10 +13,10 @@ namespace Airport.ViewModels
     {
         public int FlightId { get; set; }
         public int RateId { get; set; }
-        public FlightByRate TicketInfo { get; set; }
-        public List<Rate> Rates { get; set; }
         public Passenger Passenger { get; set; }
         public TicketDocument Document { get; set; }
+        public FlightByFilter TicketInfo { get; set; }
+        public List<Rate> Rates { get; set; }
         public List<EnumList> Genders { get; set; }
         public List<EnumList> Ages { get; set; }
         public List<EnumList> Documents { get; set; }

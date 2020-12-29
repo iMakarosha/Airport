@@ -18,30 +18,14 @@ namespace Airport.Controllers
         {
             db = context;
         }
+        [HttpPost]
+        public IActionResult SaveForm()
+        {
+            return Json(new { test = "this is a test" });
+        }
 
         public IActionResult Index()
         {
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        if (User.IsInRole("cashier"))
-        //        {
-        //            return RedirectToAction("Index", "Cashier");
-        //        }
-        //        if (User.IsInRole("administrator"))
-        //        {
-        //            return RedirectToAction("Index", "Admin");
-        //        }
-        //        if (User.IsInRole("dispatcher"))
-        //        {
-        //            return RedirectToAction("Index", "Dispatcher");
-        //        }
-        //        var sdf = User;
-
-        //        var sdfs = User.Claims;
-        //        var asd = User.Identities;
-        //        var asdfas = User.Identity;
-        //        int d = 3;
-        //    }
             return View();
         }
 

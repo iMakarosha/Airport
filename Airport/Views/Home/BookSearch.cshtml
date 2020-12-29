@@ -1,0 +1,11 @@
+﻿@model List<string>
+
+<div id="searchresults">
+    <h3>Все книги автора : @Model.First()</h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item</li>
+        }
+    </ul>
+</div>

@@ -1,4 +1,187 @@
-﻿@{
-    ViewData["Title"] = "Cashier";
+﻿@model Airport.ViewModels.ManualFilters
+@using Microsoft.AspNetCore.Html;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Http.Extensions;
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.AspNetCore.Mvc.Controllers;
+@using Microsoft.AspNetCore.Mvc.Infrastructure;
+@using Microsoft.AspNetCore.Mvc.Razor;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using Microsoft.AspNetCore.Routing;@{
+    ViewData["Title"] = "Admin";
 }
-<p>CASHIER</p>
+<div class="manual-filters">
+    <ul class="nav nav-tabs" id="flightTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="flights-tab" data-toggle="tab" href="#flightsTab" role="tab" aria-controls="flightsTab" aria-selected="true">Рейсы</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="passengers-tab" data-toggle="tab" href="#passengersTab" role="tab" aria-controls="passengersTab" aria-selected="false">Пассажиры</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="tickets-tab" data-toggle="tab" href="#ticketsTab" role="tab" aria-controls="ticketsTab" aria-selected="false">Билеты</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="flightTabContent">
+        <div class="tab-pane fade show active" id="flightsTab" role="tabpanel" aria-labelledby="flights-tab">
+            <div class="row flights-tab">
+                <div class="custom-filter col-xs-12 col-md-4">
+                    <form class="bg4 b-shd-common" asp-controller="Cashier" asp-action="FlightsByFilter"
+                          data-ajax="true" data-ajax-method="POST" data-ajax-update="#flightsUpdateBlock">
+                        <div class="filter-item">
+                            <a class="bold uppercase l1" data-toggle="collapse" href="#filter2" role="button" aria-expanded="true" aria-controls="filter2">
+                                Откуда
+                            </a>
+                            <div class="collapse show" id="filter2">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("StartingPoint", "", new { placeholder = "Москва", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <a class="bold uppercase l1" data-toggle="collapse" href="#filter3" role="button" aria-expanded="false" aria-controls="filter3">
+                                Куда
+                            </a>
+                            <div class="collapse show" id="filter3">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("TermitationPoint", "", new { placeholder = "Санкт-Петербург", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter4" role="button" aria-expanded="false" aria-controls="filter4">
+                                Дата вылета
+                            </a>
+                            <div class="collapse" id="filter4">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("Date", "", new { type = "date", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-buttons flex-row">
+                            <button class="btn btn-sm btn-orange" type="submit">Применить</button>
+                            <button class="btn btn-sm btn-white2" type="reset">Сбросить все</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-12 col-md-8" id="flightsUpdateBlock">
+                    @Html.RenderAction("FlightsByFilter", "Cashier")
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="passengersTab" role="tabpanel" aria-labelledby="passengers-tab">
+            <div class="row passengers-tab">
+                <div class="custom-filter col-xs-12 col-md-4">
+                    <form class="bg4 b-shd-common" asp-controller="Cashier" asp-action="PassengersByFilter"
+                          data-ajax="true" data-ajax-method="POST" data-ajax-update="#passengersUpdateBlock">
+                        <div class="filter-item">
+                            <a class="bold uppercase l1" data-toggle="collapse" href="#filter21" role="button" aria-expanded="true" aria-controls="filter21">
+                                Имя
+                            </a>
+                            <div class="collapse show" id="filter21">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("Name", "", new { placeholder = "Иван", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <a class="bold uppercase l1" data-toggle="collapse" href="#filter22" role="button" aria-expanded="false" aria-controls="filter22">
+                                Фамилия
+                            </a>
+                            <div class="collapse show" id="filter22">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("Surname", "", new { placeholder = "Иванов", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter23" role="button" aria-expanded="false" aria-controls="filter23">
+                                Email
+                            </a>
+                            <div class="collapse" id="filter23">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("Email", "", new { type = "email", placeholder = "mail@mail.ru", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter24" role="button" aria-expanded="false" aria-controls="filter24">
+                                Номер документа
+                            </a>
+                            <div class="collapse" id="filter24">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("DocumentValue", "", new { placeholder = "0020 457824", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-buttons flex-row">
+                            <button class="btn btn-sm btn-orange" type="submit">Применить</button>
+                            <button class="btn btn-sm btn-white2" type="reset">Сбросить все</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-12 col-md-8" id="passengersUpdateBlock">
+                    @Html.RenderAction("PassengersByFilter", "Cashier")
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="ticketsTab" role="tabpanel" aria-labelledby="tickets-tab">
+            <div class="row tickets-tab">
+                <div class="custom-filter col-xs-12 col-md-4">
+                    <form class="bg4 b-shd-common" asp-controller="Cashier" asp-action="TicketsByFilter"
+                          data-ajax="true" data-ajax-method="POST" data-ajax-update="#ticketsUpdateBlock">
+                        <div class="filter-item">
+                            <a class="bold uppercase l1" data-toggle="collapse" href="#filter31" role="button" aria-expanded="true" aria-controls="filter31">
+                                Номер билета
+                            </a>
+                            <div class="collapse show" id="filter31">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("TicketId", "", new { type = "number", placeholder = "75487", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <a class="bold uppercase l1" data-toggle="collapse" href="#filter32" role="button" aria-expanded="false" aria-controls="filter32">
+                                Дата оформления билета
+                            </a>
+                            <div class="collapse show" id="filter32">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("Date", "", new { type = "date", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter33" role="button" aria-expanded="false" aria-controls="filter33">
+                                Фамилия
+                            </a>
+                            <div class="collapse" id="filter33">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("PassengerSurname", "", new { placeholder = "Иванов", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter34" role="button" aria-expanded="false" aria-controls="filter34">
+                                Номер документа
+                            </a>
+                            <div class="collapse" id="filter34">
+                                <div class="filter-item-values">
+                                    @Html.TextBox("PassengerDocumentValue", "", new { placeholder = "0041 578854", @class = "form-control input-md" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-buttons flex-row">
+                            <button class="btn btn-sm btn-orange" type="submit">Применить</button>
+                            <button class="btn btn-sm btn-white2" type="reset">Сбросить все</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-12 col-md-8" id="ticketsUpdateBlock">
+                    @Html.RenderAction("TicketsByFilter", "Cashier")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

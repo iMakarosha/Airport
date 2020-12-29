@@ -36,7 +36,7 @@ namespace Airport
                 conn = conn.Replace("%CONTENTROOTPATH%", _contentRootPath);
             }
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(conn));
+                options.UseSqlServer(conn), ServiceLifetime.Transient);
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();

@@ -1,0 +1,128 @@
+﻿@model Airport.ViewModels.FlightFullInfo
+@{
+    ViewData["Title"] = "Flight info";
+}
+<div class="pb-3">
+    <a href="javascript:history.back()" class="l1-inv">&#8592; Назад</a>
+</div>
+@await Html.PartialAsync("_FlightInfo", Model.Flight)
+<div class="bg4 b-shd-common p-3 mb-4">
+    <h5 class="font-md bold">
+        Тариф в одну сторону
+    </h5>
+    <div class="t6">@Model.Flight.StartingPoint.City - @Model.Flight.TermitationPoint.City</div>
+    <div class="row rate-items pt-3">
+        @foreach (var rate in Model.Rates)
+        {
+            <div class="col-xs-6 col-md-4">
+                <div class="rate-item">
+                    <div class="pb-3 flex-row">
+                        <div class="mb-0">
+                            <b>@rate.Name</b><br />
+                            <span>@rate.Cost</span>
+                        </div>
+                    </div>
+
+                    <div class="rate-item-about">
+                        <div class="@(rate.Returnable?"check-true":"check-false")">Возвратный</div>
+                        <div class="@(rate.Cancellble?"check-true":"check-false")">Отменяемый</div>
+                        <div class="check-info">
+                            @rate.BaggageDimensions
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="bg4 b-shd-common p-3 mb-4">
+    <h5 class="font-md bold">
+        Пассажиры
+    </h5>
+
+    @foreach (var item in Model.Tickets)
+    {
+        <div class="row list-item">
+            <div class="col-xs-1 col-md-1">
+                <div class="list-payment-status">
+                    <div class="bold">Pay</div>
+
+                    @if (String.IsNullOrEmpty(item.PaymentInfo))
+                    {
+                        <div class="check-false"></div>
+                    }
+                    else
+                    {
+                        <div class="check-true"></div>
+                    }
+                </div>
+
+            </div>
+            <div class="col-xs-11 col-sm-11 col-md-9">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-md-8">
+                        <div class="bold uppercase">Пассажир</div>
+                        <div>
+                            <div class="list-item-name">Имя</div>
+                            <div class="list-item-value">@item.Passenger.Name @item.Passenger.Surname</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">@item.Passenger.Documents[0].DocumentType</div>
+                            <div class="list-item-value">@item.Passenger.Documents[0].Value</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">Email</div>
+                            <div class="list-item-value">@item.Passenger.Email</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">Phone</div>
+                            <div class="list-item-value">@item.Passenger.Phone</div>
+                        </div>
+                        @if (!String.IsNullOrEmpty(item.PaymentInfo))
+                        {
+                            <div class="list-item-name">Оплата</div>
+                            <div class="list-item-value">@item.PaymentInfo</div>
+                        }
+
+                    </div>
+                    <div class="col-xs-6 col-sm-2 col-md-2">
+                        <div class="bold uppercase">Тариф</div>
+                        <div>
+                            <div class="list-item-value">@item.Rate.Name</div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-6 col-sm-2 col-md-2">
+                        <div class="bold uppercase">Дата оформ.</div>
+                        <div>
+                            <div class="list-item-value">@item.Date</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-8">
+                        <div class="bold uppercase">Кассир</div>
+                        <div>
+                            <div class="list-item-name">Email</div>
+                            <div class="list-item-value">@item.CashierName</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="p-t-sm">
+                    <div class="list-item-button">
+                        <a class="btn btn-orange" asp-area="" asp-controller="Cashier" asp-action="TicketItem" asp-route-ticketId="@item.Id">Перейти к билету</a>
+                    </div>
+                    <div class="list-item-button">
+                        <form method="post" action="~/Cashier/TicketRemove">
+                            <input type="hidden" value="@item.Id" name="ticketId" />
+                            <input type="hidden" value="@Model.Flight.FlightId" name="pageIdent" />
+                            <input type="hidden" value="FlightsItem" name="pageName" />
+                            <button type="submit" class="btn btn-white2 offer-buy">Удалить бронь</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

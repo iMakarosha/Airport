@@ -4,18 +4,8 @@
 <section class="offers">
     <div class="row">
         <div class="custom-filter col-xs-12 col-md-4">
-            @using (Html.BeginForm("Search", "Cashier", FormMethod.Get, new { @class = "bg4 b-shd-common" }))
+            @using (Html.BeginForm(new { @class = "bg4 b-shd-common" }))
             {
-
-                @*public class FilterCustom
-                    {
-                        public int AirlineId { get; set; }
-                        public int AircraftModelId { get; set; }
-                        public double MinCost { get; set; }
-                        public double MaxCost { get; set; }
-                        public bool Cancellble { get; set; }
-                        public bool Returnable { get; set; }
-                    }*@
                 <div class="filter-item">
                     <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter1" role="button" aria-expanded="false" aria-controls="filter1">
                         Цена билета
@@ -36,7 +26,7 @@
                     </a>
                     <div class="collapse show" id="filter2">
                         <div class="filter-item-values">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            @Html.TextBoxFor(m => m.FilterCustom.AirlineId, new { placeholder = "Победа", @class = "form-control input-bg" })
                         </div>
                     </div>
                 </div>
@@ -46,7 +36,7 @@
                     </a>
                     <div class="collapse" id="filter3">
                         <div class="filter-item-values">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            @Html.TextBoxFor(m => m.FilterCustom.AircraftModelId, new { placeholder = "Airbus A340-200", @class = "form-control input-bg" })
                         </div>
                     </div>
                 </div>
@@ -56,7 +46,7 @@
                     </a>
                     <div class="collapse" id="filter4">
                         <div class="filter-item-values">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            @Html.TextBoxFor(m => m.FilterCustom.Returnable, new { placeholder = "Да", @class = "form-control input-bg" })
                         </div>
                     </div>
                 </div>
@@ -66,7 +56,7 @@
                     </a>
                     <div class="collapse" id="filter3">
                         <div class="filter-item-values">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            @Html.TextBoxFor(m => m.FilterCustom.Cancellble, new { placeholder = "Да", @class = "form-control input-bg" })
                         </div>
                     </div>
                 </div>
@@ -79,7 +69,7 @@
         <div class="col-xs-12 col-md-8">
             @if (Model.Flights == null)
             {
-                <p>Заполните параметры поиска</p>
+                <p>Заполните параметры поиска в шапке.<br />Фильтры слева в прототипе не работают.</p>
             }
             else
             {

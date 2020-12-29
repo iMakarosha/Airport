@@ -1,0 +1,53 @@
+﻿@model List<Airport.Models.Customer.Passenger>
+
+@if (Model == null)
+    {
+        <p>Заполните параметры поиска</p>
+    }
+    else
+    {
+        if (Model.Count == 0)
+        {
+            <p>Не удалось найти подходящего пассажира, попробуйте изменить параметры</p>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+            <div class="bg4 b-shd-common">
+                <div class="row list-item">
+                    <div class="col-xs-12 col-sm-12 col-md-9">
+                        <div class="bold uppercase">Пассажир</div>
+                        <div>
+                            <div class="list-item-name">Имя</div>
+                            <div class="list-item-value">@item.Name @item.Surname</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">@item.Documents[0].DocumentType</div>
+                            <div class="list-item-value">@item.Documents[0].Value</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">Email</div>
+                            <div class="list-item-value">@item.Email</div>
+                        </div>
+                        <div>
+                            <div class="list-item-name">Phone</div>
+                            <div class="list-item-value">@item.Phone</div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <div class="p-t-sm">
+                            <div class="list-item-button">
+                                <form method="get" action="~/Cashier/PassengerItem">
+                                    <input type="hidden" value="@item.Id" name="passengerId" />
+                                    <button type="submit" class="btn btn-orange">Подробнее</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        }
+    }

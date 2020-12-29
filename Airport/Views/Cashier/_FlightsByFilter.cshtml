@@ -1,0 +1,66 @@
+﻿@model List<Airport.ViewModels.FlightByFilter>
+
+@if (Model == null)
+    {
+        <p>Заполните параметры поиска</p>
+    }
+    else
+    {
+        if (Model.Count == 0)
+        {
+            <p>Не удалось найти подходящего рейса, попробуйте изменить параметры</p>
+        }
+        else
+        {
+            foreach (var flightItem in Model)
+            {
+                <div class="offer-items bg4 b-shd-common @(flightItem.StartingPoint.DateTime>DateTime.Now?"offer-active":"offer-disable")">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <img src="~/img/aircraft_logo/@(flightItem.AirlineId).png" />
+                        </div>
+                        <div class="col-xs-9 col-md-9">
+                            <div class="flex-row">
+                                <div class="form-group col-xs-3 col-md-3">
+                                    <div class="font-lg">@flightItem.StartingPoint.DateTime.ToShortTimeString()</div>
+                                    <div class="font-xs t6">
+                                        @flightItem.StartingPoint.City, @flightItem.StartingPoint.Country
+                                        <br />
+                                        @flightItem.StartingPoint.DateTime.ToShortDateString(), @flightItem.StartingPoint.DateTime.DayOfWeek
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-6 col-md-6">
+                                    <div class="flex aircraft-progres">
+                                        <span class="aircraft-up">
+                                            &#9992;
+                                        </span>
+                                        <span class="font-xs t6">В пути @(flightItem.StartingPoint.DateTime.Subtract(flightItem.StartingPoint.DateTime))</span>
+                                        <span class="aircraft-down">
+                                            &#9992;
+                                        </span>
+                                    </div>
+                                    <div class="aircraft-path bg6"></div>
+                                </div>
+                                <div class="form-group col-xs-3 col-md-3">
+                                    <div class="font-lg">@flightItem.TermitationPoint.DateTime.ToShortTimeString()</div>
+                                    <div class="font-xs t6">
+                                        @flightItem.TermitationPoint.City, @flightItem.TermitationPoint.Country
+                                        <br />
+                                        @flightItem.TermitationPoint.DateTime.ToShortDateString(), @flightItem.TermitationPoint.DateTime.DayOfWeek
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 col-md-3">
+                            <div class="">
+                                <form method="get" action="~/Cashier/FlightsItem">
+                                    <input type="hidden" value="@flightItem.FlightId" name="flightId" />
+                                    <button type="submit" class="btn btn-orange offer-buy">Подробнее</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
