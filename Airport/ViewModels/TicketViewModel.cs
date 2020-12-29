@@ -25,6 +25,7 @@ namespace Airport.ViewModels
         public Rate Rate { get; set; }
         public string CashierName { get; set; }
         public string PaymentInfo { get; set; }
+        public string PdfFilePath { get; set; }
     }
 
     public class TicketInfo

@@ -16,12 +16,12 @@
             {
                 <div class="offer-items bg4 b-shd-common @(flightItem.StartingPoint.DateTime>DateTime.Now?"offer-active":"offer-disable")">
                     <div class="row">
-                        <div class="col-xs-12 col-md-12">
+                        <div class="col-12 col-md-12">
                             <img src="~/img/aircraft_logo/@(flightItem.AirlineId).png" />
                         </div>
-                        <div class="col-xs-9 col-md-9">
+                        <div class="col-9 col-md-9">
                             <div class="flex-row">
-                                <div class="form-group col-xs-3 col-md-3">
+                                <div class="form-group col-3 col-md-3">
                                     <div class="font-lg">@flightItem.StartingPoint.DateTime.ToShortTimeString()</div>
                                     <div class="font-xs t6">
                                         @flightItem.StartingPoint.City, @flightItem.StartingPoint.Country
@@ -29,7 +29,7 @@
                                         @flightItem.StartingPoint.DateTime.ToShortDateString(), @flightItem.StartingPoint.DateTime.DayOfWeek
                                     </div>
                                 </div>
-                                <div class="form-group col-xs-6 col-md-6">
+                                <div class="form-group col-6 col-md-6">
                                     <div class="flex aircraft-progres">
                                         <span class="aircraft-up">
                                             &#9992;
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="aircraft-path bg6"></div>
                                 </div>
-                                <div class="form-group col-xs-3 col-md-3">
+                                <div class="form-group col-3 col-md-3">
                                     <div class="font-lg">@flightItem.TermitationPoint.DateTime.ToShortTimeString()</div>
                                     <div class="font-xs t6">
                                         @flightItem.TermitationPoint.City, @flightItem.TermitationPoint.Country
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-3 col-md-3">
+                        <div class="col-3 col-md-3">
                             <div class="">
                                 <form method="get" action="~/Cashier/FlightsItem">
                                     <input type="hidden" value="@flightItem.FlightId" name="flightId" />

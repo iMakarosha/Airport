@@ -177,7 +177,7 @@ namespace Airport.Services
             }
         }
 
-        public string UpdateTicket(int ticketId)
+        public TicketFull UpdateTicket(int ticketId)
         {
             try
             {
@@ -185,15 +185,69 @@ namespace Airport.Services
                 updatedTicket.PaymentInfo = "Номер карты: **** " + (""+updatedTicket.Id + updatedTicket.PassengerId + updatedTicket.RateId + updatedTicket.Id).ToString().Substring(0, 4);
                 db.Tickets.Update(updatedTicket);
                 db.SaveChanges();
-                return "Ok";
+                return (from t in db.Tickets
+                        join p in db.Passengers on t.PassengerId equals p.Id
+                        join u in db.Users on t.CashierId equals u.Id
+                        join r in db.Rates on t.RateId equals r.Id
+                        join fr in db.Flight_Rates on r.Id equals fr.RateId
+                        join f in db.Flights on fr.FlightId equals f.Id
+                        join wp1 in db.Waypoints on f.StartingPointId equals wp1.Id
+                        join wp2 in db.Waypoints on f.TermitationPointId equals wp2.Id
+                        where t.Id == ticketId
+
+                        select new TicketFull
+                        {
+                            Id = t.Id,
+                            Date = t.DateTime,
+                            Passenger = new Models.Customer.Passenger
+                            {
+                                Id = p.Id,
+                                Age = p.Age,
+                                Birthday = p.Birthday,
+                                Documents = (from d in db.Document
+                                            where d.PassengerId == p.Id
+                                            select new Models.Customer.Document
+                                            {
+                                                Id = d.Id,
+                                                DocumentType = d.DocumentType,
+                                                Value = d.Value
+                                            }).ToList(),
+                                BonusCardId = p.BonusCardId,
+                                Citizenship = p.Citizenship,
+                                Email = p.Email,
+                                Gender = p.Gender,
+                                Name = p.Name,
+                                Notes = p.Notes,
+                                PasswordHash = p.PasswordHash,
+                                Patronumic = p.Patronumic,
+                                Phone = p.Phone,
+                                Surname = p.Surname
+                            },
+                            Flight = new Flight
+                            {
+                                Aircraft = db.Aircrafts.Where(a=>a.Id==f.AircraftId).Select(a=>a).First(),
+                                StartingPoint = wp1,
+                                TermitationPoint = wp2,
+                                Airline = db.Airlines.Where(a=>a.Id==f.AirlineId).Select(a=>a).First()
+                            },
+                            Rate = r,
+                            CashierName = u.Email,
+                            PaymentInfo = t.PaymentInfo
+                        }).FirstOrDefault() ;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return null;
             }
         }
 
-
+        public void UpdateTicketPdfName(int ticketId, string pdfPath)
+        {
+            Ticket ticket = db.Tickets.Where(t => t.Id == ticketId).Select(t=>t).First();
+            ticket.PdfFilePath = pdfPath;
+            db.Tickets.Update(ticket);
+            db.SaveChanges();
+        }
         public string TryRemoveTicket(int ticketId, bool triggerRemove)
         {
             try

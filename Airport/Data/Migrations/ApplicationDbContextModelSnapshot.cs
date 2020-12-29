@@ -269,6 +269,9 @@ namespace Airport.Data.Migrations
                     b.Property<string>("PaymentInfo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PdfFilePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RateId")
                         .HasColumnType("int");
 

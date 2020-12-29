@@ -55,10 +55,10 @@ namespace Airport.Controllers
             //    oldFilterCustom = filterCustom;
             //}
 
-            if (!(new FilterHandler().IsEmptyFilter(model.FilterMain)))
-            {
+            //if (!(new FilterHandler().IsEmptyFilter(model.FilterMain)))
+            //{
                 model.Flights = new SearchService(db).GetSearchViewModel(filterMain);
-            }
+            //}
 
             return View(model);
         }
@@ -180,7 +180,7 @@ namespace Airport.Controllers
         [HttpPost]
         public IActionResult TicketPaid(int ticketId)
         {
-            new TicketService(db).UpdateTicket(ticketId);
+            new TicketHandler(db).UpdateTicket(ticketId);
             return RedirectToAction("TicketItem", "Cashier", new { ticketId });
         }
 

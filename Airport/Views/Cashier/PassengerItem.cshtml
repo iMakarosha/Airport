@@ -9,7 +9,7 @@
 </div>
 <section class="add-ticket">
     <div class="row">
-        <div class="col-xs-12 col-md-12">
+        <div class="col-12 col-md-12">
 
             @using (Html.BeginForm("PassengerItem", "Cashier", FormMethod.Post))
             {
@@ -18,39 +18,39 @@
                 <div class="mb-2">
                     <h5>Пассажир</h5>
                     <div class="form-row">
-                        <div class="form-group col-xs-12 col-md-3">
+                        <div class="form-group col-12 col-md-3">
                             @Html.TextBoxFor(m => m.Passenger.Surname, new { placeholder = "Фамилия", @class = "form-control input-md" })
                         </div>
-                        <div class="form-group col-xs-12 col-md-3">
+                        <div class="form-group col-12 col-md-3">
                             @Html.TextBoxFor(m => m.Passenger.Name, new { placeholder = "Имя", @class = "form-control input-md" })
                         </div>
-                        <div class="form-group col-xs-12 col-md-2">
+                        <div class="form-group col-12 col-md-2">
                             @Html.TextBoxFor(m => m.Passenger.Patronumic, new { placeholder = "Отчество", @class = "form-control input-md" })
                         </div>
-                        <div class="form-group col-xs-12 col-md-4">
+                        <div class="form-group col-12 col-md-4">
                             <div class="form-row">
-                                <div class="form-group mb-0 col-xs-12 col-md-6">
+                                <div class="form-group gender-group col-12 col-md-6">
                                     @Html.DropDownListFor(m => m.Passenger.Gender, new SelectList(Model.Genders, "Value", "Name"), new { @class = "form-control input-md" })
                                 </div>
-                                <div class="form-group mb-0 col-xs-12 col-md-6">
+                                <div class="form-group age-group col-12 col-md-6">
                                     @Html.DropDownListFor(m => m.Passenger.Age, new SelectList(Model.Ages, "Value", "Name"), new { @class = "form-control input-md" })
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-md-3">
+                        <div class="form-group col-12 col-md-3">
                             @Html.TextBoxFor(m => m.Passenger.Citizenship, new { placeholder = "Гражданство", @class = "form-control input-md" })
                         </div>
-                        <div class="form-group col-xs-12 col-md-3">
+                        <div class="form-group col-12 col-md-3">
                             @Html.DropDownListFor(m => m.Document.Type, new SelectList(Model.Documents, "Value", "Name"), new { @class = "form-control input-md" })
                         </div>
-                        <div class="form-group col-xs-12 col-md-3">
+                        <div class="form-group col-12 col-md-3">
                             @Html.TextBoxFor(m => m.Document.Value, new { placeholder = "0000 000000", @class = "form-control input-md" })
                         </div>
-                        <div class="form-group col-xs-12 col-md-3">
+                        <div class="form-group col-12 col-md-3">
                             @Html.EditorFor(m => m.Passenger.Birthday, new { htmlAttributes = new { @class = "form-control input-md" } })
                         </div>
-                        <div class="form-group col-xs-12 col-md-6">
+                        <div class="form-group col-12 col-md-6">
                             @Html.TextAreaFor(m => m.Passenger.Notes, new { placeholder = "Дополнительно", @class = "form-control input-md" })
                         </div>
                     </div>
@@ -58,16 +58,16 @@
                 <div class="mb-2">
                     <h5>Контактная информация</h5>
                     <div class="form-row">
-                        <div class="form-group col-xs-12 col-md-6">
+                        <div class="form-group col-12 col-md-6">
                             @Html.TextBoxFor(m => m.Passenger.Email, new { type = "email", placeholder = "E-mail", @class = "form-control input-md" })
                         </div>
-                        <div class="form-group col-xs-12 col-md-6">
+                        <div class="form-group col-12 col-md-6">
                             @Html.TextBoxFor(m => m.Passenger.Phone, new { type = "text", placeholder = "79048548745", @class = "form-control input-md" })
                         </div>
                     </div>
                 </div>
                 <div class="row add-list-footer">
-                    <div class="col-xs-12 col-md-12 text-r">
+                    <div class="col-12 col-md-12 text-r">
                         <button type="submit" class="btn btn-bg btn-blue">Сохранить изменения &#8594;</button>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
         @foreach (var item in Model.Tickets)
         {
             <div class="row list-item">
-                <div class="col-xs-1 col-md-1">
+                <div class="col-1 col-md-1">
                     <div class="list-payment-status">
                         <div class="bold">Pay</div>
 
@@ -100,9 +100,9 @@
                     </div>
 
                 </div>
-                <div class="col-xs-11 col-sm-11 col-md-9">
+                <div class="col-11 col-sm-11 col-md-9">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-8 col-md-8">
+                        <div class="col-12 col-sm-8 col-md-8">
                             <div class="bold uppercase">Пассажир</div>
                             <div>
                                 <div class="list-item-name">Имя</div>
@@ -127,20 +127,20 @@
                             }
 
                         </div>
-                        <div class="col-xs-6 col-sm-2 col-md-2">
+                        <div class="col-6 col-sm-2 col-md-2">
                             <div class="bold uppercase">Тариф</div>
                             <div>
                                 <div class="list-item-value">@item.Rate.Name</div>
                             </div>
 
                         </div>
-                        <div class="col-xs-6 col-sm-2 col-md-2">
+                        <div class="col-6 col-sm-2 col-md-2">
                             <div class="bold uppercase">Дата оформ.</div>
                             <div>
                                 <div class="list-item-value">@item.Date</div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-8 col-md-8">
+                        <div class="col-12 col-sm-8 col-md-8">
                             <div class="bold uppercase">Кассир</div>
                             <div>
                                 <div class="list-item-name">Email</div>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="col-12 col-sm-12 col-md-2">
                     <div class="p-t-sm">
                         <div class="list-item-button">
                             <a class="btn btn-orange" asp-area="" asp-controller="Cashier" asp-action="TicketItem" asp-route-ticketId="@item.Id">Перейти к билету</a>

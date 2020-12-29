@@ -32,9 +32,20 @@ header {
     }
 }
 
+.rate-item-custom {
+    width: 100%;
+    margin-right: 15px;
+    margin-bottom: 10px;
+
+    .rate-item-about > div {
+        padding-left: 0;
+    }
+}
+
 .services-promo__feature {
     padding: 20px;
     border-radius: 10px;
+    margin-bottom: 16px;
 
     &:hover {
         box-shadow: 10px 0 20px #e3e9f0;
@@ -120,14 +131,6 @@ header {
     border-right: 1px solid #d8dfe2;
     border-bottom: 1px solid #d8dfe2;
 
-    &:nth-child(3n) {
-        border-right: 0;
-    }
-
-    &:nth-child(n+4) {
-        border-bottom: 0;
-    }
-
     a {
         font-size: 16px;
         display: flex;
@@ -191,6 +194,7 @@ header {
 }
 
 .custom-filter {
+    margin-bottom: 24px;
     .filter-item {
         border-bottom: 1px solid #f3f5f7;
 
@@ -265,7 +269,7 @@ header {
         align-items: center;
         justify-content: space-between;
 
-        .form-group.col-xs-3.col-md-3 {
+        .form-group.col-3.col-md-3 {
             padding: 0;
         }
     }
@@ -322,7 +326,7 @@ header {
 .rate-items {
     margin: 0 -6px -12px;
 
-    .col-xs-6.col-md-4 {
+    .col-6.col-md-4 {
         padding: 0 6px 12px;
     }
 }
@@ -432,6 +436,9 @@ header {
     }
 }
 
+.age-group{
+    margin-bottom: 0;
+}
 
 @media (min-width: 768px) {
     .main-filter {
@@ -444,6 +451,9 @@ header {
             }
         }
     }
+    .gender-group {
+        margin-bottom: 0;
+    }
     .list-item {
         .list-item-button {
             width: 100%;
@@ -451,6 +461,22 @@ header {
 
         .list-payment-status {
             text-align: center;
+        }
+    }
+
+    .rate-item-custom {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+
+    .about-item {
+
+        &:nth-child(3n) {
+            border-right: 0;
+        }
+
+        &:nth-child(n+4) {
+            border-bottom: 0;
         }
     }
 }

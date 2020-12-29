@@ -25,7 +25,7 @@
     <div class="tab-content" id="flightTabContent">
         <div class="tab-pane fade show active" id="flightsTab" role="tabpanel" aria-labelledby="flights-tab">
             <div class="row flights-tab">
-                <div class="custom-filter col-xs-12 col-md-4">
+                <div class="custom-filter col-12 col-md-4">
                     <form class="bg4 b-shd-common" asp-controller="Cashier" asp-action="FlightsByFilter"
                           data-ajax="true" data-ajax-method="POST" data-ajax-update="#flightsUpdateBlock">
                         <div class="filter-item">
@@ -64,14 +64,14 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-xs-12 col-md-8" id="flightsUpdateBlock">
+                <div class="col-12 col-md-8" id="flightsUpdateBlock">
                     @Html.RenderAction("FlightsByFilter", "Cashier")
                 </div>
             </div>
         </div>
         <div class="tab-pane fade" id="passengersTab" role="tabpanel" aria-labelledby="passengers-tab">
             <div class="row passengers-tab">
-                <div class="custom-filter col-xs-12 col-md-4">
+                <div class="custom-filter col-12 col-md-4">
                     <form class="bg4 b-shd-common" asp-controller="Cashier" asp-action="PassengersByFilter"
                           data-ajax="true" data-ajax-method="POST" data-ajax-update="#passengersUpdateBlock">
                         <div class="filter-item">
@@ -121,14 +121,14 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-xs-12 col-md-8" id="passengersUpdateBlock">
+                <div class="col-12 col-md-8" id="passengersUpdateBlock">
                     @Html.RenderAction("PassengersByFilter", "Cashier")
                 </div>
             </div>
         </div>
         <div class="tab-pane fade" id="ticketsTab" role="tabpanel" aria-labelledby="tickets-tab">
             <div class="row tickets-tab">
-                <div class="custom-filter col-xs-12 col-md-4">
+                <div class="custom-filter col-12 col-md-4">
                     <form class="bg4 b-shd-common" asp-controller="Cashier" asp-action="TicketsByFilter"
                           data-ajax="true" data-ajax-method="POST" data-ajax-update="#ticketsUpdateBlock">
                         <div class="filter-item">
@@ -178,7 +178,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-xs-12 col-md-8" id="ticketsUpdateBlock">
+                <div class="col-12 col-md-8" id="ticketsUpdateBlock">
                     @Html.RenderAction("TicketsByFilter", "Cashier")
                 </div>
             </div>

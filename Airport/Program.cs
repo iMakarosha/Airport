@@ -29,7 +29,6 @@ namespace Airport
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    //SampleData.Initialize(context);
                 }
                 catch (Exception ex)
                 {

@@ -7,22 +7,22 @@
 <section class="main-filter">
     @using (Html.BeginForm("Search", "Cashier", FormMethod.Get, new { @class = "row" }))
     {
-        <div class="col-xs-12 col-md-10">
+        <div class="col-12 col-md-10">
             <div class="form-row">
-                <div class="form-group col-xs-12 col-md-3">
+                <div class="form-group col-12 col-md-3">
                     @Html.TextBoxFor(m => m.FilterMain.StartingPoint, new { placeholder = "Откуда", @class = "form-control input-bg" })
                     @*<input placeholder="Откуда" type="text" class="form-control input-bg" name="StartingPoint" id="StartingPoint">*@
                 </div>
-                <div class="form-group col-xs-12 col-md-3">
+                <div class="form-group col-12 col-md-3">
                     @Html.TextBoxFor(m => m.FilterMain.TermitationPoint, new { placeholder = "Куда", @class = "form-control input-bg" })
                     @*<input placeholder="Куда" type="text" class="form-control input-bg" name="TermitationPoint" id="TermitationPoint">*@
                 </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.TextBoxFor(m => m.FilterMain.Date, new { type = "date", placeholder = "Когда", @class = "form-control input-bg" })
+                <div class="form-group col-12 col-md-3">
+                    @Html.TextBoxFor(m => m.FilterMain.Date, new { type = "date", @Value = DateTime.Now.ToShortDateString(), placeholder = "Когда", @class = "form-control input-bg" })
                     @*<input placeholder="Когда" type="date" class="form-control input-bg" name="Date" id="Date">*@
                 </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.ListBoxFor(m => m.FilterMain.ServiceClass, new SelectList(Model.ServiceClass, "ServiceClassValue", "ServiceClassName"), new { @class = "form-control input-bg" })
+                <div class="form-group col-12 col-md-3">
+                    @Html.ListBoxFor(m => m.FilterMain.ServiceClass, new SelectList(Model.ServiceClass, "ServiceClassValue", "ServiceClassName", Model.ServiceClass[0].ServiceClassValue), new { @class = "form-control input-bg" })
                     @*<select class="form-control input-bg" name="ServiceClass" id="ServiceClass">
                             @foreach (var enumValue in Enum.GetValues(typeof(ServiceClass)))
                             {
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group button-block col-xs-12 col-md-2">
+        <div class="form-group button-block col-12 col-md-2">
             <button type="submit" class="btn btn-bg btn-orange">Найти билеты</button>
         </div>
     }

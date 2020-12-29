@@ -14,7 +14,7 @@
     <div class="row rate-items pt-3">
         @foreach (var rate in Model.Rates)
         {
-            <div class="col-xs-6 col-md-4">
+            <div class="col-6 col-md-4">
                 <div class="rate-item">
                     <div class="pb-3 flex-row">
                         <div class="mb-0">
@@ -43,7 +43,7 @@
     @foreach (var item in Model.Tickets)
     {
         <div class="row list-item">
-            <div class="col-xs-1 col-md-1">
+            <div class="col-1 col-md-1">
                 <div class="list-payment-status">
                     <div class="bold">Pay</div>
 
@@ -58,9 +58,9 @@
                 </div>
 
             </div>
-            <div class="col-xs-11 col-sm-11 col-md-9">
+            <div class="col-11 col-sm-11 col-md-9">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-8 col-md-8">
+                    <div class="col-12 col-sm-8 col-md-8">
                         <div class="bold uppercase">Пассажир</div>
                         <div>
                             <div class="list-item-name">Имя</div>
@@ -85,20 +85,20 @@
                         }
 
                     </div>
-                    <div class="col-xs-6 col-sm-2 col-md-2">
+                    <div class="col-6 col-sm-2 col-md-2">
                         <div class="bold uppercase">Тариф</div>
                         <div>
                             <div class="list-item-value">@item.Rate.Name</div>
                         </div>
 
                     </div>
-                    <div class="col-xs-6 col-sm-2 col-md-2">
+                    <div class="col-6 col-sm-2 col-md-2">
                         <div class="bold uppercase">Дата оформ.</div>
                         <div>
                             <div class="list-item-value">@item.Date</div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-8 col-md-8">
+                    <div class="col-12 col-sm-8 col-md-8">
                         <div class="bold uppercase">Кассир</div>
                         <div>
                             <div class="list-item-name">Email</div>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2">
+            <div class="col-12 col-sm-12 col-md-2">
                 <div class="p-t-sm">
                     <div class="list-item-button">
                         <a class="btn btn-orange" asp-area="" asp-controller="Cashier" asp-action="TicketItem" asp-route-ticketId="@item.Id">Перейти к билету</a>

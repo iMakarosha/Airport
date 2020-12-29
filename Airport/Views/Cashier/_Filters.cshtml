@@ -3,7 +3,7 @@
 
 <section class="offers">
     <div class="row">
-        <div class="custom-filter col-xs-12 col-md-4">
+        <div class="custom-filter col-12 col-md-4">
             @using (Html.BeginForm(new { @class = "bg4 b-shd-common" }))
             {
                 <div class="filter-item">
@@ -51,10 +51,10 @@
                     </div>
                 </div>
                 <div class="filter-item">
-                    <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter4" role="button" aria-expanded="false" aria-controls="filter4">
+                    <a class="bold uppercase l1 collapsed" data-toggle="collapse" href="#filter5" role="button" aria-expanded="false" aria-controls="filter5">
                         Отменяемый
                     </a>
-                    <div class="collapse" id="filter3">
+                    <div class="collapse" id="filter5">
                         <div class="filter-item-values">
                             @Html.TextBoxFor(m => m.FilterCustom.Cancellble, new { placeholder = "Да", @class = "form-control input-bg" })
                         </div>
@@ -66,30 +66,30 @@
                 </div>
             }
         </div>
-        <div class="col-xs-12 col-md-8">
+        <div class="col-12 col-md-8">
             @if (Model.Flights == null)
             {
                 <p>Заполните параметры поиска в шапке.<br />Фильтры слева в прототипе не работают.</p>
             }
             else
             {
-                var flights = Model.Flights.ToList();
+                var flights = Model.Flights.OrderByDescending(m => m.StartingPoint.DateTime).ToList();
                 if (flights.Count == 0)
                 {
-                <p>Не удалось найти подходящего рейса, попробуйте изменить параметры</p>
+                <p>Не удалось найти подходящий рейс, попробуйте изменить параметры</p>
                 }
                 else
                 {
                     foreach (var flightItem in flights)
                     {
-                    <div class="offer-items bg4 b-shd-common">
+                    <div class="offer-items bg4 b-shd-common @(flightItem.StartingPoint.DateTime>DateTime.Now?"offer-active":"offer-disable")">
                         <div class="row">
-                            <div class="col-xs-9 col-md-9">
+                            <div class="col-9 col-md-9">
                                 <div>
-                                    <img src="~/img/aircraft_logo/@(flightItem.AirlineId).png" />
+                                    <img src="~/img/aircraft_logo/@(flightItem.AirlineId).png" alt="@flightItem.AirlineName" />
                                 </div>
                                 <div class="flex-row">
-                                    <div class="form-group col-xs-3 col-md-3">
+                                    <div class="form-group col-3 col-md-3">
                                         <div class="font-lg">@flightItem.StartingPoint.DateTime.ToShortTimeString()</div>
                                         <div class="font-xs t6">
                                             @flightItem.StartingPoint.City, @flightItem.StartingPoint.Country
@@ -97,7 +97,7 @@
                                             @flightItem.StartingPoint.DateTime.ToShortDateString(), @flightItem.StartingPoint.DateTime.DayOfWeek
                                         </div>
                                     </div>
-                                    <div class="form-group col-xs-6 col-md-6">
+                                    <div class="form-group col-6 col-md-6">
                                         <div class="flex aircraft-progres">
                                             <span class="aircraft-up">
                                                 &#9992;
@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="aircraft-path bg6"></div>
                                     </div>
-                                    <div class="form-group col-xs-3 col-md-3">
+                                    <div class="form-group col-3 col-md-3">
                                         <div class="font-lg">@flightItem.TermitationPoint.DateTime.ToShortTimeString()</div>
                                         <div class="font-xs t6">
                                             @flightItem.TermitationPoint.City, @flightItem.TermitationPoint.Country
@@ -118,17 +118,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    @flightItem.Name
-                                    @flightItem.Returnable
-                                    @flightItem.Cancellble
-                                    @flightItem.Aircraft.Model
-                                    @flightItem.AirlineName
-                                    @flightItem.BaggageDimensions
-                                    @flightItem.ServiceClass.GetDisplayName()
+                                <div class="flex-row">
+                                    <div class="rate-item rate-item-custom">
+                                        <div class="pb-3 flex-row">
+                                            <b>@flightItem.Name</b><br />
+                                        </div>
+
+                                        <div class="rate-item-about row">
+                                            <div class="col-6 col-md-6 @(flightItem.Returnable?"check-true":"check-false")">Возвратный</div>
+                                            <div class="col-6 col-md-6 @(flightItem.Cancellble?"check-true":"check-false")">Отменяемый</div>
+                                            <div class="col-12 col-md-12 check-info">
+                                                @flightItem.BaggageDimensions
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xs-3 col-md-3">
+                            <div class="col-3 col-md-3">
                                 <div class="">
                                     <form method="get" action="~/Cashier/AddTicket">
                                         <input type="hidden" value="@flightItem.FlightId" name="FlightId" />

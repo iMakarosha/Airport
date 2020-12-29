@@ -26,5 +26,6 @@ namespace Airport.Models.Customer
         public string PaymentInfo { get; set; }
         [Required]
         public DateTime DateTime { get; set; }
+        public string PdfFilePath { get; set; }
     }
 }

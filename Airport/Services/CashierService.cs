@@ -424,7 +424,8 @@ namespace Airport.Services
                                      Passenger = new Passenger
                                      {
                                          Id = t.PassengerId
-                                     }
+                                     },
+                                     PdfFilePath = t.PdfFilePath
                                  }).First();
 
                 result.Passenger = (from p in db.Passengers
@@ -520,9 +521,10 @@ namespace Airport.Services
                     }
                     else
                     {
+                        db.Document.Remove(db.Document.Where(d => d.PassengerId == passengerChanged.Id).Select(d => d).FirstOrDefault());
                         db.Document.Add(new Document
                         {
-                            PassengerId = changedPass.Passenger.Id,
+                            PassengerId = changedPass.PassengerId,
                             DocumentType = documentType,
                             Value = changedPass.Document.Value
                         });
